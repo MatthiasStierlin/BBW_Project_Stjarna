@@ -1,0 +1,54 @@
+CREATE database project_stjarna;
+USE project_stjarna;
+
+CREATE TABLE spaceship(
+    spaceShipId SERIAL,
+    type VARCHAR(255),
+    length FLOAT,
+    weight FLOAT,
+    MinCrew INTEGER,
+    MaxCrew INTEGER,
+
+    PRIMARY KEY(spaceShipId)
+);
+
+CREATE TABLE ranks(
+    rankId SERIAL,
+    name VARCHAR(255),
+
+    PRIMARY KEY (rankId)
+);
+
+CREATE TABLE roles(
+    roleId SERIAL,
+    name VARCHAR(255),
+
+    PRIMARY KEY (roleId)
+);
+
+CREATE TABLE tasks(
+    taskId SERIAL,
+    name VARCHAR(255),
+
+    PRIMARY KEY (taskId)
+);
+
+CREATE TABLE spacer(
+    spacerId SERIAL,
+    spaceShipId BIGINT UNSIGNED,
+    taskId BIGINT UNSIGNED,
+    rankId BIGINT UNSIGNED,
+    roleId BIGINT UNSIGNED,
+    firstName VARCHAR(255),
+    lastName VARCHAR(255),
+    profession VARCHAR(255),
+    bloodtype VARCHAR(5),
+    weight FLOAT,
+    height FLOAT,
+    age INTEGER,
+
+    PRIMARY KEY (spacerId),
+    FOREIGN KEY (taskId) REFERENCES tasks(taskId),
+    FOREIGN KEY (rankId) REFERENCES ranks(rankId),
+    FOREIGN KEY (roleId) REFERENCES roles(roleId)
+);
